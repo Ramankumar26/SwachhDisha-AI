@@ -17,6 +17,9 @@ dist/
 build/
 coverage/
 
+# Local database files
+*.db
+
 # Logs
 *.log
 npm-debug.log*
@@ -26,5 +29,3 @@ npm-debug.log*
 .idea/
 .DS_Store
 Thumbs.db
-# Local database files
-*.db
