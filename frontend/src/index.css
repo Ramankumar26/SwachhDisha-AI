@@ -1,0 +1,233 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-background: #f8fafc;
+    --bg-surface: #ffffff;
+    --bg-surface-2: #f1f5f9;
+    --border: #e2e8f0;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --accent: #4f46e5;
+    --accent-contrast: #ffffff;
+    
+    /* Semantics */
+    --color-success: #10b981;
+    --color-success-bg: #d1fae5;
+    --color-warning: #f59e0b;
+    --color-warning-bg: #fef3c7;
+    --color-danger: #ef4444;
+    --color-danger-bg: #fee2e2;
+    --color-info: #3b82f6;
+    --color-info-bg: #dbeafe;
+    
+    /* Severities */
+    --color-critical: #dc2626;
+    --color-high: #ef4444;
+    --color-medium: #f59e0b;
+    --color-low: #3b82f6;
+    --color-normal: #10b981;
+  }
+
+  :root[data-theme="dark"], .dark {
+    --bg-background: #020617;
+    --bg-surface: #0f172a;
+    --bg-surface-2: #1e293b;
+    --border: rgba(255, 255, 255, 0.1);
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent: #4f46e5;
+    --accent-contrast: #ffffff;
+    
+    /* Semantics */
+    --color-success: #10b981;
+    --color-success-bg: rgba(16, 185, 129, 0.2);
+    --color-warning: #f59e0b;
+    --color-warning-bg: rgba(245, 158, 11, 0.2);
+    --color-danger: #ef4444;
+    --color-danger-bg: rgba(239, 68, 68, 0.2);
+    --color-info: #3b82f6;
+    --color-info-bg: rgba(59, 130, 246, 0.2);
+    
+    /* Severities */
+    --color-critical: #ef4444;
+    --color-high: #f97316;
+    --color-medium: #f59e0b;
+    --color-low: #3b82f6;
+    --color-normal: #10b981;
+  }
+
+  html, body, #root {
+    @apply h-full w-full m-0 p-0 font-sans transition-colors duration-200;
+    color: var(--text-primary);
+    background-color: var(--bg-background);
+    scroll-behavior: smooth;
+  }
+  
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply rounded-full;
+    background-color: var(--bg-surface-2);
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full transition-colors;
+    background-color: var(--text-muted);
+    opacity: 0.5;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-muted);
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+}
+
+/* Map specific tweaks */
+.dark-map-tiles {
+  filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+}
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: var(--bg-background) !important;
+}
+.leaflet-popup-content-wrapper {
+  @apply backdrop-blur-md rounded-xl shadow-2xl transition-colors duration-200 !important;
+  background-color: var(--bg-surface) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-primary) !important;
+}
+.leaflet-popup-tip {
+  @apply transition-colors duration-200 !important;
+  background-color: var(--bg-surface) !important;
+  border: 1px solid var(--border) !important;
+}
+
+/* Custom Animation Keyframes */
+@keyframes map-pulse-high {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+@keyframes map-pulse-medium {
+  0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(245, 158, 11, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes slide-in-bottom {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-right {
+  0% { opacity: 0; transform: translateX(20px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes scale-up {
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-slide-in-bottom { animation: slide-in-bottom 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-slide-in-right { animation: slide-in-right 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-fade-in { animation: fade-in 0.5s ease-out forwards; }
+.animate-scale-up { animation: scale-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+.stagger-1 { animation-delay: 100ms; opacity: 0; }
+.stagger-2 { animation-delay: 200ms; opacity: 0; }
+.stagger-3 { animation-delay: 300ms; opacity: 0; }
+.stagger-4 { animation-delay: 400ms; opacity: 0; }
+.stagger-5 { animation-delay: 500ms; opacity: 0; }
+
+/* Glassmorphism Utilities - Optimized for performance */
+.glass-panel {
+  @apply backdrop-blur-sm shadow-2xl;
+  background-color: color-mix(in srgb, var(--bg-surface) 80%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+}
+
+.glass-card {
+  @apply backdrop-blur-sm transition-all duration-300;
+  background-color: color-mix(in srgb, var(--bg-surface-2) 60%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 30%, transparent);
+}
+.glass-card:hover {
+  background-color: color-mix(in srgb, var(--bg-surface-2) 80%, transparent);
+}
+
+.bg-surface-translucent {
+  background-color: color-mix(in srgb, var(--bg-surface) 90%, transparent);
+}
+
+.premium-hover {
+  @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:border-white/20 relative overflow-hidden;
+}
+
+.premium-hover::after {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 transition-opacity duration-300 pointer-events-none;
+}
+.premium-hover:hover::after {
+  @apply opacity-100;
+}
+
+/* Magnetic Button Base */
+.magnetic-btn {
+  @apply transition-transform duration-200 ease-out;
+}
+
+/* 3D Background Grid */
+.perspective-container {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.grid-3d {
+  position: absolute;
+  width: 200vw;
+  height: 200vh;
+  left: -50vw;
+  top: 0;
+  background-image: 
+    linear-gradient(rgba(16, 185, 129, 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 185, 129, 0.3) 1px, transparent 1px);
+  background-size: 80px 80px;
+  transform: rotateX(75deg) translateZ(-200px);
+  animation: gridMove 4s linear infinite;
+  /* Fades out the grid at the "horizon" */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 20%, black 80%);
+  mask-image: linear-gradient(to bottom, transparent 20%, black 80%);
+}
+
+@keyframes gridMove {
+  0% { transform: rotateX(75deg) translateZ(-200px) translateY(0); }
+  100% { transform: rotateX(75deg) translateZ(-200px) translateY(80px); }
+}
